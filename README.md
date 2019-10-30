@@ -1,2 +1,2 @@
 # hackerRank
- Solutions to challenges on hackerRank and codeWar
+ Solutions to challenges on hackerRank, Leetcode and codeWar
