@@ -47,12 +47,14 @@
 # @lc code=start
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        s1 = [0]*len(nums)
-        s2 = [0]*len(nums)
-        s1[1]=nums[0]
-        s2[1]=nums[1]
-        i,j=
-
-        return ans
+        if not nums:
+            return 0
+        if len(nums)<=2:
+            return max(nums)
+        dp = [0]*(len(nums)+1)
+        dp[1]=nums[0]
+        for j in range(2,len(nums)+1):
+            dp[j]=max(dp[j-1],dp[j-2]+nums[j-1])
+        return dp[-1]
 # @lc code=end
 
