@@ -37,21 +37,16 @@ class Solution:
                 ans+=(i<n)
             return ans
 
-        def isPrime(m):
-            j=1
-            if m%6 not in [5,1]:
-                return 0
-            else:
-                for j in range(2,int(m**0.5)+1):
-                    if m%j==0:
-                        return 0
-                return 1
         ans=0
-        notprime = [0]*n
+        prime = [1]*n
         
         for i in range(2, n):
-            if not notprime[i] and isPrime(i):
+            if prime[i]:
                 ans+=1
+                j=2
+                while i*j<n:
+                    prime[i*j]=0
+                    j+=1
 
         return ans
 # @lc code=end
