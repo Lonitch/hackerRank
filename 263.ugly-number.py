@@ -51,20 +51,24 @@
 # @lc code=start
 class Solution:
     def isUgly(self, num: int) -> bool:
-        t = abs(num)
+        t = num
+        if t==1:
+            return True
+        if t==0:
+            return False
         if t%2 and t%3 and t%5:
             return False
-        n = t//2+1
-        prime = [1]*n
-        for i in range(2,n):
-            if prime[i]:
-                j = 2
-                while i*j<n:
-                    prime[i*j]=0
-                    j+=1
-                if i >5 and t%i==0:
-                    return False
-        return True
+        while t%2==0 or t%3==0 or t%5==0:
+            if t%2==0:
+                t = t//2
+            if t%3==0:
+                t = t//3
+            if t%5==0:
+                t = t//5
+        if t==1:
+            return True
+        else:
+            return False
 
 # @lc code=end
 
