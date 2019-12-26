@@ -51,27 +51,12 @@ class Solution:
     def repeatedSubstringPattern(self, s: str) -> bool:
         if s=='':
             return False
-        pattern = ''
-        p = 0
-        niter = 0
-        for c in s:
-            if c not in pattern or pattern[p]!=c:
-                if niter>0:
-                    return False
-                else:
-                    pattern+=c
-                    p=0
-            else:
-                p+=1
-            
-            if len(pattern)==p:
-                p=0
-                niter+=1
-
-        if p==0 and niter>0:
-            return True
-        else:
-            return False
+        n = len(s)
+        for l in range(n//2,0,-1):
+            pattern = s[:l]*(n//l)
+            if pattern==s:
+                return True
+        return False
             
 # @lc code=end
 
