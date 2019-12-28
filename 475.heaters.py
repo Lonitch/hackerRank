@@ -67,22 +67,33 @@ class Solution:
     def findRadius(self, houses: List[int], heaters: List[int]) -> int:
         if not houses or not heaters:
             return 0
-        hlen = len(houses)
-        hset = set(houses)
-        b = max(houses+heaters)+1
-        r = b
-        l = 0
-        while l<=r:
-            mid = l+(r-l)//2
-            htset = set()
-            for a in heaters:
-                htset=htset.union(set(range(max(0,a-mid),min(a+mid+1,b))))
-            if hset.difference(htset):
-                l=mid+1
-            elif htset.difference(hset):
-                r=mid-1
+        heaters.sort()
+        ans = 0
+        htlen = len(heaters)
+        for h in houses:
+            l = 0
+            r = htlen
+            # Find the nearest-neighbor heaters 
+            # for each house
+            while l<r:
+                mid = l+(r-l)//2
+                if heaters[mid]<h:
+                    l = mid+1
+                else:
+                    r = mid
+            # Calculate the distance between the house
+            # and the heaters, use the smaller one
+            if r==htlen:
+                d1 = 2**31
             else:
-                return mid
-        return l
+                d1 = heaters[r]-h
+            if r==0:
+                d2 = 2**31
+            else:
+                d2 = h-heaters[r-1]
+            # compare current distance with previous ones
+            # use the larger one
+            ans = max(ans,min(d1,d2))
+        return ans
 # @lc code=end
 
