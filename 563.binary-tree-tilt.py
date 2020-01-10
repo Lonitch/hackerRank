@@ -1,0 +1,76 @@
+#
+# @lc app=leetcode id=563 lang=python3
+#
+# [563] Binary Tree Tilt
+#
+# https://leetcode.com/problems/binary-tree-tilt/description/
+#
+# algorithms
+# Easy (47.34%)
+# Likes:    386
+# Dislikes: 957
+# Total Accepted:    63.9K
+# Total Submissions: 134.3K
+# Testcase Example:  '[1,2,3]'
+#
+# Given a binary tree, return the tilt of the whole tree.
+# 
+# The tilt of a tree node is defined as the absolute difference between the sum
+# of all left subtree node values and the sum of all right subtree node values.
+# Null node has tilt 0.
+# 
+# The tilt of the whole tree is defined as the sum of all nodes' tilt.
+# 
+# Example:
+# 
+# Input: 
+# ⁠        1
+# ⁠      /   \
+# ⁠     2     3
+# Output: 1
+# Explanation: 
+# Tilt of node 2 : 0
+# Tilt of node 3 : 0
+# Tilt of node 1 : |2-3| = 1
+# Tilt of binary tree : 0 + 0 + 1 = 1
+# 
+# 
+# 
+# Note:
+# 
+# The sum of node values in any subtree won't exceed the range of 32-bit
+# integer. 
+# All the tilt values won't exceed the range of 32-bit integer.
+# 
+# 
+#
+
+# @lc code=start
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def __init__(self):
+        self.ans_=0
+
+    def findTilt(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        def util(node,n):
+            if node is None:
+                return n
+            else:
+                l=util(node.left,n+node.val)
+                r=util(node.right,n+node.val)
+                self.ans_+=abs(l-r)
+                return l+r-n-node.val
+
+        util(root,0)
+        return self.ans_
+                
+# @lc code=end
+
