@@ -9,8 +9,8 @@
 # Easy (64.22%)
 # Likes:    576
 # Dislikes: 28
-# Total Accepted:    71.3K
-# Total Submissions: 110.1K
+# Total Accepted:    71.4K
+# Total Submissions: 110.2K
 # Testcase Example:  '[3,5,1,6,2,9,8,null,null,7,4]\n' +
   '[3,5,1,6,7,4,2,null,null,null,null,null,null,9,8]'
 #
@@ -48,6 +48,22 @@
 
 class Solution:
     def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
-        
+        def util(node,lst):
+            if node.left is None and node.right is None:
+                lst.append(node.val)
+            else:
+                if node.left is not None:
+                    util(node.left,lst)
+                if node.right is not None:
+                    util(node.right,lst)
+        nl1 = []
+        nl2 = []
+        util(root1,nl1)
+        util(root2,nl2)
+        for a,b in zip(nl1,nl2):
+            if a!=b:
+                return False
+        return True
+
 # @lc code=end
 
